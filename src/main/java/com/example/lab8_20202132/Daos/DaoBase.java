@@ -1,0 +1,24 @@
+package com.example.lab8_20202132.Daos;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import com.example.lab8_20202132.Beans.libro;
+
+public abstract class DaoBase {
+
+    public Connection getConnection() throws SQLException {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/libreria", "root", "root");
+    }
+
+    public abstract libro crear(libro libro);
+
+    public abstract libro eliminar(libro libro);
+}
