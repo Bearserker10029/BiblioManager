@@ -1,4 +1,4 @@
-package com.example.lab8_20202132.Beans;
+package com.example.BiblioManager.Beans;
 
 public class genero {
     private int id;

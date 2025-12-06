@@ -1,4 +1,4 @@
-package com.example.lab8_20202132.Beans;
+package com.example.BiblioManager.Beans;
 
 public class libro {
     private int id;
@@ -15,7 +15,7 @@ public class libro {
     }
 
     public libro(int id, String titulo, String autor, int paginas, int premios, editorial editorial_id,
-            genero genero_id) {
+            genero genero_id, genero genero, editorial editorial) {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;

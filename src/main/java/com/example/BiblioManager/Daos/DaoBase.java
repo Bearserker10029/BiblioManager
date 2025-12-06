@@ -1,10 +1,10 @@
-package com.example.lab8_20202132.Daos;
+package com.example.BiblioManager.Daos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.example.lab8_20202132.Beans.libro;
+import com.example.BiblioManager.Beans.libro;
 
 public abstract class DaoBase {
 

@@ -1,11 +1,11 @@
-package com.example.lab8_20202132.Daos;
+package com.example.BiblioManager.Daos;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-import com.example.lab8_20202132.Beans.genero;
-import com.example.lab8_20202132.Beans.libro;
-import com.example.lab8_20202132.Beans.editorial;
+import com.example.BiblioManager.Beans.genero;
+import com.example.BiblioManager.Beans.libro;
+import com.example.BiblioManager.Beans.editorial;
 
 public class LibroDao extends DaoBase {
     public libro obtenerLibro(String id) {

@@ -1,9 +1,9 @@
-<%@ page import="com.example.lab8_20202132.Beans.libro" %>
-    <%@ page import="com.example.lab8_20202132.Beans.genero" %>
-        <%@ page import="com.example.lab8_20202132.Beans.editorial" %>
+<%@ page import="com.example.BiblioManager.Beans.libro" %>
+    <%@ page import="com.example.BiblioManager.Beans.genero" %>
+        <%@ page import="com.example.BiblioManager.Beans.editorial" %>
             <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-                <jsp:useBean type="java.util.ArrayList<com.example.lab8_20202132.Beans.libro>" scope="request"
-                    id="lista" />
+                <jsp:useBean type="java.util.ArrayList<com.example.BiblioManager.Beans.libro>" scope="request"
+                             id="lista" />
                 %>
                 <!DOCTYPE html>
                 <html>

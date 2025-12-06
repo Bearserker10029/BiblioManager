@@ -1,9 +1,9 @@
-package com.example.lab8_20202132.Controllers;
+package com.example.BiblioManager.Controllers;
 
-import com.example.lab8_20202132.Daos.LibroDao;
-import com.example.lab8_20202132.Beans.libro;
-import com.example.lab8_20202132.Beans.editorial;
-import com.example.lab8_20202132.Beans.genero;
+import com.example.BiblioManager.Daos.LibroDao;
+import com.example.BiblioManager.Beans.libro;
+import com.example.BiblioManager.Beans.editorial;
+import com.example.BiblioManager.Beans.genero;
 import java.io.IOException;
 import java.util.ArrayList;
 
