@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,23 +25,37 @@ public class LibroServlet extends HttpServlet {
 
         switch (action) {
             case "lista":
-                ArrayList<libro> listaLibros = libroDao.listar();
+                String generoIdStr = request.getParameter("generoId");
+                String editorialIdStr = request.getParameter("editorialId");
+                Integer generoId = (generoIdStr != null && !generoIdStr.isEmpty()) ? Integer.parseInt(generoIdStr) : null;
+                Integer editorialId = (editorialIdStr != null && !editorialIdStr.isEmpty()) ? Integer.parseInt(editorialIdStr) : null;
+
+                ArrayList<libro> listaLibros = libroDao.listarPorFiltros(generoId, editorialId);
+                ArrayList<genero> generos = libroDao.listarGeneros();
+                ArrayList<editorial> editoriales = libroDao.listarEditoriales();
+
                 request.setAttribute("lista", listaLibros);
+                request.setAttribute("generos", generos);
+                request.setAttribute("editoriales", editoriales);
                 view = request.getRequestDispatcher("libros/lista.jsp");
                 view.forward(request, response);
                 break;
             case "Crear":
+                ArrayList<genero> generosCrear = libroDao.listarGeneros();
+                ArrayList<editorial> editorialesCrear = libroDao.listarEditoriales();
+                request.setAttribute("generos", generosCrear);
+                request.setAttribute("editoriales", editorialesCrear);
                 view = request.getRequestDispatcher("libros/crear.jsp");
                 view.forward(request, response);
                 break;
             case "borrar":
                 String libroID = request.getParameter("id");
-                if (libroDao.obtenerLibro(libroID) != null) {
+                libro libro = libroDao.obtenerLibro(libroID);
+                if (libro != null && libro.getPremios() == 0) {
                     libroDao.borrarLibro(libroID);
                 }
                 response.sendRedirect(request.getContextPath() + "/LibroServlet");
                 break;
-
         }
     }
 
@@ -67,21 +80,16 @@ public class LibroServlet extends HttpServlet {
                 nuevoLibro.setAutor(autor);
                 nuevoLibro.setPaginas(paginas);
                 nuevoLibro.setPremios(premios);
-                editorial editorial = new editorial();
+
                 genero genero = new genero();
-                editorial.setId(editorialId);
                 genero.setId(generoId);
-                nuevoLibro.setEditorial_id(editorial);
                 nuevoLibro.setGenero_id(genero);
 
+                editorial editorial = new editorial();
+                editorial.setId(editorialId);
+                nuevoLibro.setEditorial_id(editorial);
+
                 libroDao.crear(nuevoLibro);
-                response.sendRedirect(request.getContextPath() + "/LibroServlet");
-                break;
-            case "eliminar":
-                String libroID = request.getParameter("id");
-                if (libroDao.obtenerLibro(libroID) != null) {
-                    libroDao.borrarLibro(libroID);
-                }
                 response.sendRedirect(request.getContextPath() + "/LibroServlet");
                 break;
         }
