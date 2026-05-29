@@ -1,5 +1,10 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
+<% ArrayList<com.example.BiblioManager.Beans.genero> generos = (ArrayList<com.example.BiblioManager.Beans.genero>) request.getAttribute("generos");
+   if (generos == null) { generos = new ArrayList<>(); }
+   ArrayList<com.example.BiblioManager.Beans.editorial> editoriales = (ArrayList<com.example.BiblioManager.Beans.editorial>) request.getAttribute("editoriales");
+   if (editoriales == null) { editoriales = new ArrayList<>(); }
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,7 +40,7 @@
                     <label>Género</label>
                     <select class="form-select" name="genero_id" required>
                         <option value="">Seleccione un género</option>
-                        <% for (com.example.BiblioManager.Beans.genero genero : (ArrayList<com.example.BiblioManager.Beans.genero>) request.getAttribute("generos")) { %>
+                        <% for (com.example.BiblioManager.Beans.genero genero : generos) { %>
                             <option value="<%=genero.getId()%>"><%=genero.getNombre()%></option>
                         <% } %>
                     </select>
@@ -44,13 +49,13 @@
                     <label>Editorial</label>
                     <select class="form-select" name="editorial_id" required>
                         <option value="">Seleccione una editorial</option>
-                        <% for (com.example.BiblioManager.Beans.editorial editorial : (ArrayList<com.example.BiblioManager.Beans.editorial>) request.getAttribute("editoriales")) { %>
+                        <% for (com.example.BiblioManager.Beans.editorial editorial : editoriales) { %>
                             <option value="<%=editorial.getId()%>"><%=editorial.getName()%></option>
                         <% } %>
                     </select>
                 </div>
                 <a href="<%=request.getContextPath()%>/LibroServlet" class="btn btn-danger">Regresar</a>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
             </form>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

@@ -1,6 +1,12 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="lista" scope="request" type="ArrayList<com.example.BiblioManager.Beans.libro>" />
+<% ArrayList<com.example.BiblioManager.Beans.libro> lista = (ArrayList<com.example.BiblioManager.Beans.libro>) request.getAttribute("lista");
+   if (lista == null) { lista = new ArrayList<>(); }
+   ArrayList<com.example.BiblioManager.Beans.genero> generos = (ArrayList<com.example.BiblioManager.Beans.genero>) request.getAttribute("generos");
+   if (generos == null) { generos = new ArrayList<>(); }
+   ArrayList<com.example.BiblioManager.Beans.editorial> editoriales = (ArrayList<com.example.BiblioManager.Beans.editorial>) request.getAttribute("editoriales");
+   if (editoriales == null) { editoriales = new ArrayList<>(); }
+%>
 <html>
     <head>
         <title>Lista de Libros</title>
@@ -21,7 +27,7 @@
                     <label class="form-label">Género</label>
                     <select class="form-select" name="generoId">
                         <option value="">Todos los géneros</option>
-                        <% for (com.example.BiblioManager.Beans.genero genero : (ArrayList<com.example.BiblioManager.Beans.genero>) request.getAttribute("generos")) { %>
+                        <% for (com.example.BiblioManager.Beans.genero genero : generos) { %>
                             <option value="<%=genero.getId()%>" <%= request.getParameter("generoId") != null && request.getParameter("generoId").equals(String.valueOf(genero.getId())) ? "selected" : "" %>><%=genero.getNombre()%></option>
                         <% } %>
                     </select>
@@ -30,7 +36,7 @@
                     <label class="form-label">Editorial</label>
                     <select class="form-select" name="editorialId">
                         <option value="">Todas las editoriales</option>
-                        <% for (com.example.BiblioManager.Beans.editorial editorial : (ArrayList<com.example.BiblioManager.Beans.editorial>) request.getAttribute("editoriales")) { %>
+                        <% for (com.example.BiblioManager.Beans.editorial editorial : editoriales) { %>
                             <option value="<%=editorial.getId()%>" <%= request.getParameter("editorialId") != null && request.getParameter("editorialId").equals(String.valueOf(editorial.getId())) ? "selected" : "" %>><%=editorial.getName()%></option>
                         <% } %>
                     </select>
